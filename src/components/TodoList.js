@@ -1,13 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { IoMdDoneAll }  from 'react-icons/io'
 
   export default function TodoList(props) {
-    return (
 
+    return (
       props.todos.map(todo => {
 
         return (
-          <div key={todo.id} className='todos'>
+          <div key={todo.id} className={todo.done ? 'todos todo-done' : 'todos'}>
 
             <div className='name'>
               <span>{todo.name}</span>
@@ -18,9 +19,12 @@ import { Link } from 'react-router-dom'
             </div>
 
             <div className='buttons'>
-              <Link to={`/${todo.id}`}><button>Edit</button></Link>
-              <button onClick={() => {props.done(todo.id)}}>Done</button>
-              <button onClick={() => {props.delete(todo.id)}}>Delete</button>
+              <button className={todo.done ? 'todo-done' : ''} onClick={() => {props.delete(todo.id)}}>Delete</button>
+              <button className={todo.done ? 'todo-done' : ''} onClick={() => {props.done(todo.id)}}>Done</button>
+              <Link to={`/${todo.id}`}>
+                <button className={todo.done ? 'todo-done' : ''}>Edit</button>
+              </Link>
+              {todo.done ? <IoMdDoneAll className='mark' /> : ''}     
             </div>
           </div>
         )

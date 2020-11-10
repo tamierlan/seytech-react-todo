@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from "react-router";
+import { Link } from 'react-router-dom';
 
 class Edit extends React.Component {
   constructor(props) {
@@ -40,7 +41,15 @@ class Edit extends React.Component {
           type='text'
         />
         <button onClick={() => {this.props.save_edit(this.state.id)}}>
-          save
+          {
+            this.props.state.create_name === '' ? 'save'
+            :
+            <Link to={`/`}>Save</Link>
+          }
+        </button >
+
+        <button onClick={this.props.cancel}>
+          <Link to={`/`}>Cancel</Link>
         </button>
       </div>
     )

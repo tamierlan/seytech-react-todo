@@ -36,6 +36,10 @@ body {
   padding: 10px;
   background: silver;
 }
+.todo-done {
+  background-color: grey;
+  border: 1px solid red;;
+}
 .todos .todo {
   text-align: center;
 }
@@ -43,9 +47,13 @@ body {
   width: 33.3%;
 
 }
-.todos button {
+.todos button, .mark {
   float: right;
   margin-left: 10px;
+}
+.mark {
+  color: red;
+  font-size: 20px;
 }
 .add {
   width: 100%;
@@ -77,9 +85,14 @@ body {
   font-size: 40px;
   border-radius: 10px;
   background: green;
+  margin: 5px;
 }
 .edit input {
   width: 90%;
   margin: 10px;
   padding: 7px;
+}
+.edit button a {
+  text-decoration: none;
+  color: white
 }

@@ -21,15 +21,27 @@ export default class App extends React.Component {
 
   onChange = (e) => {
     if (e.target.name === 'name') {
-      this.setState({create_name: e.target.value})
+      this.setState({create_name: e.target.value, warn_name: ''})
     } else if (e.target.name === 'todo') {
-      this.setState({create_todo: e.target.value})
+      this.setState({create_todo: e.target.value, warn_name: ''})
     }
-    this.setState({warn_name: ''})
   }
+
 
   add = () => {
     this.setState({add: !this.state.add, warn_name: '', create_name: '', create_todo: ''})
+  }
+
+
+  cancel = () => {
+    this.setState({create_name: '', create_todo: ''})
+  }
+
+
+  delete = (id) => {
+    const copy = [...this.state.todos]
+    const todo = copy.filter(e => {return e.id !== id})
+    this.setState({todos: todo})
   }
 
 
@@ -41,7 +53,6 @@ export default class App extends React.Component {
       if (exist) {
         this.setState({warn_name: 'warn', create_title: this.state.create_name + ' is already exist'})
       } else {
-
         const new_todo = {
           id: this.state.create_name + Math.random(),
           name: this.state.create_name,
@@ -54,23 +65,33 @@ export default class App extends React.Component {
     }
   }
 
-  delete = (id) => {
-    const copy = [...this.state.todos]
-    const todo = copy.filter(e => {return e.id !== id})
-    this.setState({todos: todo})
+
+  done = (id) => {
+    this.state.todos.filter(e => {
+      if (e.id === id) {
+        console.log('tok ', e.id)
+        e.done = !e.done
+      }
+    })
+    this.setState({todos: this.state.todos})
   }
+
+
+
+
+
 
   save_edit = (id) => {
     if (this.state.create_name === '') {
       return
     }
-    // const temp = this.state.todos.filter(e => {
-    //   return e.id == id
-    // })
-
-
-    console.log('id', id)
-
+    this.state.todos.filter(e => {
+      if (e.id === id) {
+        e.name = this.state.create_name
+        e.todo = this.state.create_todo
+      }
+    })
+    this.setState({create_name: '', create_todo: ''})
   }
 
 
@@ -97,8 +118,10 @@ export default class App extends React.Component {
             <Route  exact path='/'>
               <TodoList
                 delete={this.delete}
+                cancel={this.cancel}
                 todos={this.state.todos}
                 edit={this.edit}
+                done={this.done}
               />
             </Route>
 
