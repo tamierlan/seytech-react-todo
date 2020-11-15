@@ -40,11 +40,8 @@ body {
   background-color: grey;
   border: 1px solid red;;
 }
-.todos .todo {
-  text-align: center;
-}
-.todos .name, .todos .todo, .todos .buttons {
-  width: 33.3%;
+.todos .todo, .todos .buttons {
+  width: 50%;
 
 }
 .todos button, .mark {
@@ -95,4 +92,8 @@ body {
 .edit button a {
   text-decoration: none;
   color: white
+}
+.loading {
+  width: 100%;
+  text-align: center;margin-top: 100px;
 }
